@@ -1,6 +1,4 @@
-﻿#region 1st Question Update Shipment Class
-
-public class Shipment
+﻿public class Shipment
 {
     private string trackingCode;
     private string description;
@@ -9,71 +7,52 @@ public class Shipment
 
     public string TrackingCode
     {
-        get
-        {
-            return trackingCode;
-        }
+        get { return trackingCode; }
 
         private set
         {
             if (!string.IsNullOrWhiteSpace(value))
-            {
                 trackingCode = value;
-            }
         }
     }
 
     public string Description
     {
-        get
-        {
-            return description;
-        }
+        get { return description; }
 
         set
         {
             if (!string.IsNullOrWhiteSpace(value))
-            {
                 description = value;
-            }
         }
     }
 
     public double Weight
     {
-        get
-        {
-            return weight;
-        }
+        get { return weight; }
 
         set
         {
             if (value > 0)
-            {
                 weight = value;
-            }
         }
     }
 
     public decimal DeliveryFee
     {
-        get
-        {
-            return deliveryFee;
-        }
+        get { return deliveryFee; }
 
         private set
         {
             if (value >= 0)
-            {
                 deliveryFee = value;
-            }
         }
     }
 
     public DeliveryAddress Destination { get; set; }
 
-   
+    #region Question 3 - Update Shipment
+
     public virtual decimal EstimatedCost
     {
         get
@@ -81,6 +60,40 @@ public class Shipment
             return DeliveryFee + ((decimal)Weight * 5);
         }
     }
+
+    public void UpdateWeight(double newWeight)
+    {
+        if (newWeight > 0)
+            Weight = newWeight;
+    }
+
+    public void UpdateWeight(
+        double newWeight,
+        double packingWeight)
+    {
+        if (newWeight > 0 && packingWeight >= 0)
+            Weight = newWeight + packingWeight;
+    }
+
+    public virtual void PrintShipment()
+    {
+        Console.WriteLine(
+            $"Tracking Code : {TrackingCode}");
+
+        Console.WriteLine(
+            $"Description : {Description}");
+
+        Console.WriteLine(
+            $"Weight : {Weight} KG");
+
+        Console.WriteLine(
+            $"Delivery Fee : {DeliveryFee} EGP");
+
+        Console.WriteLine(
+            $"Estimated Cost : {EstimatedCost} EGP");
+    }
+
+    #endregion
 
     public Shipment(
         string trackingCode,
@@ -105,47 +118,6 @@ public class Shipment
     public void UpdateDeliveryFee(decimal newFee)
     {
         if (newFee >= 0)
-        {
             DeliveryFee = newFee;
-        }
-    }
-
-    public void UpdateWeight(double newWeight)
-    {
-        if (newWeight > 0)
-        {
-            Weight = newWeight;
-        }
-    }
-
-    public void UpdateWeight(
-        double newWeight,
-        double packingWeight)
-    {
-        if (newWeight > 0 && packingWeight >= 0)
-        {
-            Weight = newWeight + packingWeight;
-        }
-    }
-
-    public virtual void PrintShipment()
-    {
-        Console.WriteLine(
-            $"Tracking Code : {TrackingCode}");
-
-        Console.WriteLine(
-            $"Description : {Description}");
-
-        Console.WriteLine(
-            $"Weight : {Weight} KG");
-
-        Console.WriteLine(
-            $"Delivery Fee : {DeliveryFee} EGP");
-
-        Console.WriteLine(
-            $"Estimated Cost : {EstimatedCost} EGP");
-
     }
 }
-
-#endregion
