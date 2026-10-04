@@ -1,4 +1,4 @@
-﻿#region 2nd Question Practical
+﻿#region 1st Question Update Shipment Class
 
 public class Shipment
 {
@@ -144,6 +144,7 @@ public class Shipment
 
         Console.WriteLine(
             $"Estimated Cost : {EstimatedCost} EGP");
+
     }
 }
 
